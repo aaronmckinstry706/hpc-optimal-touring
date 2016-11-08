@@ -14,7 +14,7 @@ def generateSiteInfo(n):
 	openHours = []
 	for i in range(0,numDays):
 		if random.random() < probabilityOfBeingOpen:
-			openHours.append((n,i,random.randint(6,11),random.randint(15,22)))
+			openHours.append((n,i+1,random.randint(6,11),random.randint(15,22)))
 	if len(openHours) > 0:
 		minOpenInterval = min(openHours,key=lambda tup:tup[3]-tup[2])
 		minOpenDuration = minOpenInterval[3] - minOpenInterval[2]
