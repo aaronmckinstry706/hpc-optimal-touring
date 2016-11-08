@@ -1,0 +1,1 @@
+module load gcc-5.2.0; ./tour given_info.txt; module purge gcc-5.2.0
