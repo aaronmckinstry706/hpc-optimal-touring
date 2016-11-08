@@ -15,7 +15,8 @@
 #include <algorithm>
 
 #define CHECK_INTERVAL 100000
-#define TIME_ALLOWED 120
+#define TIME_ALLOWED 20
+#define DAY_DELIMITER -1
 
 bool stopEarly = false;//determines when whole program should stop
 
@@ -358,6 +359,22 @@ std::pair<double,std::vector<int> > get_value_around_cluster_for_day(
 	return bestPath;
 }
 
+template <typename T>
+void printTour(std::vector<T> tour) {
+	std::ostringstream oss;
+	for (int index = 0; index < tour.size(); index++) {
+		T i = tour[index];
+		if (i != DAY_DELIMITER) {
+			oss << i;
+			if (index < tour.size()-1 && tour[index+1] != DAY_DELIMITER)
+				oss << ' ';
+		}
+		else if (index > 0)
+			oss << '\n';
+	}
+	std::cout << oss.str();
+}
+
 int myrandom(int i) { return std::rand()%i; }
 
 int main(int argc, char *argv[]) {
@@ -393,6 +410,8 @@ int main(int argc, char *argv[]) {
 					sites, site_times, clusters[k], k, globalUsed);
 			
 			value += bestPathInCluster.first;
+			
+			globalBestPath.push_back(DAY_DELIMITER);
 			globalBestPath.insert(globalBestPath.end(),
 						  bestPathInCluster.second.begin(),
 						  bestPathInCluster.second.end());
@@ -408,7 +427,7 @@ int main(int argc, char *argv[]) {
 		std::random_shuffle(clusters.begin(),clusters.end(), myrandom);
 	} while (true);
 	
-	std::cout << best_tour << std::endl;
+	printTour(best_tour);
 
 	return 0;
 }
