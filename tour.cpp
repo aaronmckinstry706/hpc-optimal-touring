@@ -15,7 +15,7 @@
 #include <algorithm>
 
 #define CHECK_INTERVAL 100000
-#define TIME_ALLOWED 20
+#define TIME_ALLOWED 120
 #define DAY_DELIMITER -1
 
 bool stopEarly = false;//determines when whole program should stop
